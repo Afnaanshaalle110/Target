@@ -22,3 +22,13 @@ The function returns an object containing:
 ```javascript
 const result = calculateTotalTarget('2024-01-01', '2024-03-31', 5220);
 console.log(result);
+/*
+Output:
+{
+  daysExcludingFridays: [27, 25, 26],
+  daysWorkedExcludingFridays: [27, 25, 26],
+  monthlyTargets: [435, 434.99999999999994, 435],
+  totalTarget: 1305
+}
+*/
+
