@@ -3,11 +3,8 @@ function calculateTotalTarget(startDate, endDate, totalAnnualTarget, excludedDay
     const end = new Date(endDate);
     const monthsData = {};
 
-    // Create a set of excluded days for quick lookup
-    const excludedDaysSet = new Set(excludedDays);
-
     // Function to check if a date is an excluded day
-    const isExcludedDay = (date) => excludedDaysSet.has(date.getDay());
+    const isExcludedDay = (date) => excludedDays.includes(date.getDay());
 
     // Function to get the number of working days excluding specified days for a month
     const getWorkingDaysExcluding = (year, month) => {
@@ -49,7 +46,7 @@ function calculateTotalTarget(startDate, endDate, totalAnnualTarget, excludedDay
         daysExcludingFridays: [],
         daysWorkedExcludingFridays: [],
         monthlyTargets: [],
-        totalTarget: totalAnnualTarget
+        totalTarget: 0
     };
 
     // Calculate monthly data
@@ -63,13 +60,16 @@ function calculateTotalTarget(startDate, endDate, totalAnnualTarget, excludedDay
     // Calculate monthly targets based on working days
     for (const monthKey in monthsData) {
         const workedDays = monthsData[monthKey].workedDays;
-        const monthlyTarget = (workedDays / totalWorkingDays) * totalAnnualTarget;
-        result.monthlyTargets.push(monthlyTarget || 0);
+        const monthlyTarget = totalWorkingDays > 0 ? (workedDays / totalWorkingDays) * totalAnnualTarget : 0;
+        result.monthlyTargets.push(monthlyTarget);
     }
+
+    // Calculate total target based on worked days
+    result.totalTarget = totalWorkingDays > 0 ? (totalAnnualTarget / totalWorkingDays) * totalWorkingDays : 0;
 
     return result;
 }
 
-// Ex usage
+// Example usage
 const result = calculateTotalTarget('2024-01-01', '2024-03-31', 5220);
 console.log(result);
