@@ -1,4 +1,9 @@
-// Function to calculate the target distribution
+// id: c1211262
+
+
+
+
+
 function calculateTotalTarget(startDate, endDate, totalAnnualTarget, excludedDays = [5]) {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -71,7 +76,7 @@ function calculateTotalTarget(startDate, endDate, totalAnnualTarget, excludedDay
     return result;
 }
 
-// Example usage
+// Ex usage
 const result = calculateTotalTarget('2024-01-01', '2024-03-31', 5220);
 
 // Output the result
